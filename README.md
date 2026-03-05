@@ -32,6 +32,30 @@ sudo apt update
 sudo apt install -y build-essential make fzf
 ```
 
+## Быстрый старт: установка для использования
+
+Если хотите сразу пользоваться командой глобально из любой папки:
+
+```bash
+cd /home/feelyamon/Cpp_projects/linux_killer
+make
+sudo make install
+```
+
+Что делает каждая команда:
+
+- `cd /home/feelyamon/Cpp_projects/linux_killer`: переход в папку проекта
+- `make`: сборка бинарника `quicksig`
+- `sudo make install`: установка `quicksig` и `quicksig-gui` в `/usr/local/bin`
+
+Проверка после установки:
+
+```bash
+which quicksig
+which quicksig-gui
+quicksig --help
+```
+
 ## Сборка
 
 ```bash
