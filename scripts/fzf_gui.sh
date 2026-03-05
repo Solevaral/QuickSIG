@@ -7,15 +7,15 @@ if ! command -v fzf >/dev/null 2>&1; then
     exit 1
 fi
 
-if ! command -v pkill-smart >/dev/null 2>&1; then
-    if [[ -x "./pkill-smart" ]]; then
-        PKILL_SMART="./pkill-smart"
+if ! command -v quicksig >/dev/null 2>&1; then
+    if [[ -x "./quicksig" ]]; then
+        QUICKSIG_CMD="./quicksig"
     else
-        echo "Error: pkill-smart not found in PATH. Build/install first." >&2
+        echo "Error: quicksig not found in PATH. Build/install first." >&2
         exit 1
     fi
 else
-    PKILL_SMART="pkill-smart"
+    QUICKSIG_CMD="quicksig"
 fi
 
 selection="$(
@@ -31,7 +31,7 @@ fi
 
 mapfile -t pids < <(awk '{print $1}' <<<"$selection")
 
-cmd=("$PKILL_SMART" --yes --force)
+cmd=("$QUICKSIG_CMD" --yes --force)
 for pid in "${pids[@]}"; do
     cmd+=(--pid "$pid")
 done

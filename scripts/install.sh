@@ -7,9 +7,9 @@ PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$PROJECT_DIR"
 make
 
-install -m 0755 pkill-smart /usr/local/bin/pkill-smart
-install -m 0755 scripts/fzf_gui.sh /usr/local/bin/pkill-smart-gui
+install -m 0755 quicksig /usr/local/bin/quicksig
+install -m 0755 scripts/fzf_gui.sh /usr/local/bin/quicksig-gui
 
-echo "Installed: /usr/local/bin/pkill-smart"
-echo "Installed: /usr/local/bin/pkill-smart-gui"
-echo "Try: pkill-smart --help"
+echo "Installed: /usr/local/bin/quicksig"
+echo "Installed: /usr/local/bin/quicksig-gui"
+echo "Try: quicksig --help"

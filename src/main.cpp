@@ -35,7 +35,7 @@ namespace
                   << "  -f, --force           If SIGTERM is ignored, use SIGKILL\n"
                   << "  -y, --yes             Do not ask for confirmation\n"
                   << "  -l, --list            List all running processes\n"
-                  << "  -i, --interactive     Launch fzf-based selector (pkill-smart-gui)\n"
+                  << "  -i, --interactive     Launch fzf-based selector (quicksig-gui)\n"
                   << "  -h, --help            Show this help\n";
     }
 
@@ -117,7 +117,7 @@ namespace
         return true;
     }
 
-    void print_processes(const std::vector<linux_killer::ProcessInfo> &processes)
+    void print_processes(const std::vector<quicksig::ProcessInfo> &processes)
     {
         std::cout << std::left << std::setw(8) << "PID" << std::setw(24) << "NAME" << std::setw(8) << "STATE"
                   << std::setw(12) << "RSS(KB)"
@@ -132,19 +132,19 @@ namespace
         }
     }
 
-    std::string outcome_to_text(linux_killer::KillOutcome outcome)
+    std::string outcome_to_text(quicksig::KillOutcome outcome)
     {
         switch (outcome)
         {
-        case linux_killer::KillOutcome::SentSigterm:
+        case quicksig::KillOutcome::SentSigterm:
             return "SIGTERM";
-        case linux_killer::KillOutcome::EscalatedToSigkill:
+        case quicksig::KillOutcome::EscalatedToSigkill:
             return "SIGKILL";
-        case linux_killer::KillOutcome::NotFound:
+        case quicksig::KillOutcome::NotFound:
             return "NOT_FOUND";
-        case linux_killer::KillOutcome::PermissionDenied:
+        case quicksig::KillOutcome::PermissionDenied:
             return "PERMISSION_DENIED";
-        case linux_killer::KillOutcome::Timeout:
+        case quicksig::KillOutcome::Timeout:
             return "TIMEOUT";
         default:
             return "FAILED";
@@ -161,10 +161,10 @@ namespace
 
     int launch_interactive()
     {
-        int code = std::system("pkill-smart-gui");
+        int code = std::system("quicksig-gui");
         if (code != 0)
         {
-            std::cerr << "Failed to run interactive UI. Ensure pkill-smart-gui is installed and executable.\n";
+            std::cerr << "Failed to run interactive UI. Ensure quicksig-gui is installed and executable.\n";
             return 1;
         }
         return 0;
@@ -187,23 +187,23 @@ int main(int argc, char **argv)
 
     if (args.list_only)
     {
-        const auto all = linux_killer::list_all_processes();
+        const auto all = quicksig::list_all_processes();
         print_processes(all);
         std::cout << "\nTotal: " << all.size() << " process(es)\n";
         return 0;
     }
 
-    std::vector<linux_killer::ProcessInfo> targets;
+    std::vector<quicksig::ProcessInfo> targets;
 
     if (!args.name_query.empty())
     {
-        const auto by_name = linux_killer::find_processes_by_name(args.name_query);
+        const auto by_name = quicksig::find_processes_by_name(args.name_query);
         targets.insert(targets.end(), by_name.begin(), by_name.end());
     }
 
     for (int pid : args.pids)
     {
-        auto proc = linux_killer::find_process_by_pid(pid);
+        auto proc = quicksig::find_process_by_pid(pid);
         if (proc.has_value())
         {
             targets.push_back(*proc);
@@ -222,7 +222,7 @@ int main(int argc, char **argv)
 
     const int current_pid = static_cast<int>(getpid());
     std::set<int> seen;
-    std::vector<linux_killer::ProcessInfo> unique;
+    std::vector<quicksig::ProcessInfo> unique;
     for (const auto &process : targets)
     {
         if (process.pid == current_pid)
@@ -254,11 +254,11 @@ int main(int argc, char **argv)
     int fail = 0;
     for (const auto &process : unique)
     {
-        linux_killer::KillResult result = linux_killer::terminate_process(process.pid, args.force);
+        quicksig::KillResult result = quicksig::terminate_process(process.pid, args.force);
         std::cout << "PID " << process.pid << " -> " << outcome_to_text(result.outcome) << " (" << result.message
                   << ")\n";
-        if (result.outcome == linux_killer::KillOutcome::SentSigterm ||
-            result.outcome == linux_killer::KillOutcome::EscalatedToSigkill)
+        if (result.outcome == quicksig::KillOutcome::SentSigterm ||
+            result.outcome == quicksig::KillOutcome::EscalatedToSigkill)
         {
             ++ok;
         }

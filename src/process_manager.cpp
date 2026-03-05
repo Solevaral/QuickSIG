@@ -13,7 +13,7 @@
 #include <thread>
 #include <unistd.h>
 
-namespace linux_killer
+namespace quicksig
 {
     namespace
     {
@@ -305,4 +305,4 @@ namespace linux_killer
         return result;
     }
 
-} // namespace linux_killer
+} // namespace quicksig

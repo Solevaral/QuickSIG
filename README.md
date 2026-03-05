@@ -1,11 +1,11 @@
-# linux_killer (`pkill-smart`)
+# QuickSIG (`quicksig`)
 
 Утилита для Linux, которая помогает безопасно и быстро завершать зависшие процессы.
 
 Проект включает:
 
-- CLI-команду `pkill-smart` (поиск по имени/PID + завершение процесса)
-- Интерактивный режим `pkill-smart-gui` через `fzf`
+- CLI-команду `quicksig` (поиск по имени/PID + завершение процесса)
+- Интерактивный режим `quicksig-gui` через `fzf`
 
 ## Возможности
 
@@ -35,48 +35,48 @@ sudo apt install -y build-essential make fzf
 ## Сборка
 
 ```bash
-cd linux_killer
+cd quicksig
 make
 ```
 
-После сборки появится бинарник `./pkill-smart`.
+После сборки появится бинарник `./quicksig`.
 
 ## Локальный запуск
 
 ### 1) Поиск и завершение по имени
 
 ```bash
-./pkill-smart --name telegram
+./quicksig --name telegram
 ```
 
 ### 2) Завершение по PID
 
 ```bash
-./pkill-smart --pid 12345
+./quicksig --pid 12345
 ```
 
 ### 3) Принудительное завершение (если процесс игнорирует SIGTERM)
 
 ```bash
-./pkill-smart --name telegram --force
+./quicksig --name telegram --force
 ```
 
 ### 4) Без подтверждения
 
 ```bash
-./pkill-smart --name telegram --yes --force
+./quicksig --name telegram --yes --force
 ```
 
 ### 5) Список процессов
 
 ```bash
-./pkill-smart --list
+./quicksig --list
 ```
 
 ### 6) Интерактивный режим
 
 ```bash
-./pkill-smart --interactive
+./quicksig --interactive
 ```
 
 ## Установка как системной команды
@@ -89,8 +89,8 @@ sudo make install
 
 Установятся:
 
-- `/usr/local/bin/pkill-smart`
-- `/usr/local/bin/pkill-smart-gui`
+- `/usr/local/bin/quicksig`
+- `/usr/local/bin/quicksig-gui`
 
 Удаление:
 
@@ -107,22 +107,22 @@ sudo ./scripts/install.sh
 ## Использование после установки
 
 ```bash
-pkill-smart --name telegram
-pkill-smart --pid 12345 --force
-pkill-smart --list
-pkill-smart --interactive
+quicksig --name telegram
+quicksig --pid 12345 --force
+quicksig --list
+quicksig --interactive
 ```
 
 GUI напрямую:
 
 ```bash
-pkill-smart-gui
+quicksig-gui
 ```
 
 ## Полный список аргументов
 
 ```bash
-pkill-smart --help
+quicksig --help
 ```
 
 Ключи:
@@ -147,19 +147,19 @@ pkill-smart --help
 ### Telegram завис
 
 ```bash
-pkill-smart --name telegram
+quicksig --name telegram
 ```
 
 Если не закрывается:
 
 ```bash
-pkill-smart --name telegram --force
+quicksig --name telegram --force
 ```
 
 ### Процесс завис по известному PID
 
 ```bash
-pkill-smart --pid 4321 --force
+quicksig --pid 4321 --force
 ```
 
 ## Разработка
@@ -179,7 +179,7 @@ make clean
 ## Структура проекта
 
 ```text
-linux_killer/
+quicksig/
 ├── src/
 │   ├── main.cpp
 │   ├── process_manager.h
@@ -196,7 +196,7 @@ linux_killer/
 ```bash
 git init
 git add .
-git commit -m "Initial commit: pkill-smart process killer"
+git commit -m "Initial commit: quicksig process killer"
 git branch -M main
 git remote add origin <YOUR_GITHUB_REPO_URL>
 git push -u origin main

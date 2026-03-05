@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace linux_killer
+namespace quicksig
 {
 
     enum class KillOutcome
@@ -38,4 +38,4 @@ namespace linux_killer
     std::optional<ProcessInfo> find_process_by_pid(int pid);
     KillResult terminate_process(int pid, bool allow_force, int timeout_seconds = 3);
 
-} // namespace linux_killer
+} // namespace quicksig
