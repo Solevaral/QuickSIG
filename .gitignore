@@ -1,0 +1,34 @@
+# Build artifacts
+pkill-smart
+*.o
+*.obj
+*.out
+*.a
+*.so
+*.dylib
+*.dll
+
+# CMake (if used later)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Generic build dirs
+build/
+dist/
+out/
+
+# Editors and IDE
+.vscode/*.code-workspace
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
