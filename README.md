@@ -37,14 +37,14 @@ sudo apt install -y build-essential make fzf
 Если хотите сразу пользоваться командой глобально из любой папки:
 
 ```bash
-cd /home/feelyamon/Cpp_projects/linux_killer
+cd /home/feelyamon/Cpp_projects/quicksig
 make
 sudo make install
 ```
 
 Что делает каждая команда:
 
-- `cd /home/feelyamon/Cpp_projects/linux_killer`: переход в папку проекта
+- `cd /home/feelyamon/Cpp_projects/quicksig`: переход в папку проекта
 - `make`: сборка бинарника `quicksig`
 - `sudo make install`: установка `quicksig` и `quicksig-gui` в `/usr/local/bin`
 
@@ -220,7 +220,7 @@ quicksig/
 ```bash
 git init
 git add .
-git commit -m "Initial commit: quicksig process killer"
+git commit -m "Initial commit: quicksig CLI tool"
 git branch -M main
 git remote add origin <YOUR_GITHUB_REPO_URL>
 git push -u origin main
